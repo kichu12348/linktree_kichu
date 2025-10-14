@@ -22,6 +22,16 @@ html {
 body {
   font-family: "Poppins", sans-serif;
   background-color: var(--black);
+  background-image: -webkit-radial-gradient(
+      circle at 100% 0%,
+      var(--orange-start) 0%,
+      rgba(13, 13, 13, 0) 25%
+    ),
+    -webkit-radial-gradient(
+      circle at 0% 100%,
+      var(--orange-end) 0%,
+      rgba(13, 13, 13, 0) 25%
+    );
   background-image: radial-gradient(
       circle at 100% 0%,
       var(--orange-start) 0%,
@@ -74,6 +84,23 @@ body::before {
   letter-spacing: -0.5px;
   position: relative;
   display: inline-block;
+}
+
+.logo::after{
+  content:"_";
+  position: absolute;
+  right: -14px;
+  animation: blink 1.5s step-end infinite;
+  color: var(--orange-start);
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 0;
+  }
+  51%, 100% {
+    opacity: 1;
+  }
 }
 
 .location-time {
@@ -240,6 +267,7 @@ body::after {
   object-fit: cover;
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
   animation: float 6s ease-in-out infinite;
+  image-rendering: optimizeQuality;
 }
 
 /* Photo glow effect */

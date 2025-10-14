@@ -2,8 +2,13 @@ function updateLocalTime() {
   const timeElement = document.getElementById("local-time");
   const now = new Date();
 
-  const hours = String(now.getHours()).padStart(2, "0");
-  const minutes = String(now.getMinutes()).padStart(2, "0");
+  const options = { timeZone: "Asia/Kolkata" };
+
+  const localeString = now.toLocaleString("en-US", options);
+  const current = new Date(localeString);
+
+  const hours = String(current.getHours()).padStart(2, "0");
+  const minutes = String(current.getMinutes()).padStart(2, "0");
 
   timeElement.textContent = `${hours}:${minutes}`;
 }
@@ -14,7 +19,7 @@ setInterval(updateLocalTime, 1000);
 
 const linkButtons = document.querySelectorAll(".link-btn");
 
-linkButtons.forEach((button, index) => {
+linkButtons.forEach((button) => {
   button.addEventListener("click", function (e) {
     this.classList.add("ripple");
 
@@ -175,9 +180,26 @@ function typewriterEffect() {
   setTimeout(type, 1000);
 }
 
+function typeLogo(){
+  const logo = document.getElementById("logo");
+  if (!logo) return;
+  const text = "kichu";
+  let i = 0;
+  const speed = 150;
+  function type() {
+    if (i < text.length) {
+      logo.textContent += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+  setTimeout(type, 500);
+}
+
 window.addEventListener("load", () => {
   document.body.classList.add("loaded");
   animateAccents();
+  typeLogo();
 
   document.addEventListener("mousemove", (e) => {
     const x = e.clientX;
